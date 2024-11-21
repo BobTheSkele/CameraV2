@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Face Image Overlay</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #camera {
+            position: relative;
+            width: 640px;
+            height: 480px;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            width: 50%;
+            height: 20%;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="camera">
+        <video id="video" autoplay></video>
+        <!-- Replace the src with your direct image URL from imgbb -->
+        <img id="overlay" src="https://i.ibb.co/7yk8c6g/your-image.jpg" alt="Face overlay">
+    </div>
+
+    <script>
+        async function startCamera() {
+            const videoElement = document.getElementById('video');
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing the camera:', error);
+            }
+        }
+
+        startCamera();
+    </script>
+
+</body>
+</html>
+
